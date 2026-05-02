@@ -5,14 +5,21 @@
 <% } %>
 
 <ul>
+  <% if (tasks.length === 0) { %>
+    <p>No tasks yet.</p>
+  <% } %>
+
   <% tasks.forEach(task => { %>
     <li>
       <strong><%= task.title %></strong>
-      - Project: <%= task.project?.title %>
-      - Assigned: <%= task.assignedTo?.name %>
+      <br>
+      <small>Project: <%= task.project?.title %></small>
+      <br>
+      <small>Assigned: <%= task.assignedTo?.name %></small>
+      <br>
 
       <% if (user && user.role === "admin") { %>
-        <a href="/tasks/edit/<%= task._id %>">Edit</a>
+        <a href="/tasks/edit/<%= task._id %>">Edit</a> |
         <a href="/tasks/delete/<%= task._id %>">Delete</a>
       <% } %>
     </li>

@@ -11,14 +11,28 @@
 
 <hr>
 
-<h3>Navigation</h3>
+<h3>Quick Actions</h3>
 
-<ul>
-  <li><a href="/projects">View Projects</a></li>
-  <li><a href="/tasks">View Tasks</a></li>
+<div style="display: flex; gap: 20px; flex-wrap: wrap;">
 
-  <% if (user && user.role === "admin") { %>
-    <li><a href="/projects/create">Create Project</a></li>
-    <li><a href="/tasks/create">Create Task</a></li>
-  <% } %>
-</ul>
+  <div style="padding: 15px; border: 1px solid #ddd; border-radius: 8px;">
+    <h4>Projects</h4>
+    <a href="/projects">View Projects</a>
+    <br><br>
+
+    <% if (user && user.role === "admin") { %>
+      <a href="/projects/create">Create Project</a>
+    <% } %>
+  </div>
+
+  <div style="padding: 15px; border: 1px solid #ddd; border-radius: 8px;">
+    <h4>Tasks</h4>
+    <a href="/tasks">View Tasks</a>
+    <br><br>
+
+    <% if (user && user.role === "admin") { %>
+      <a href="/tasks/create">Create Task</a>
+    <% } %>
+  </div>
+
+</div>
