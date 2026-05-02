@@ -2,14 +2,28 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+// Show Register Page
+exports.registerPage = (req, res) => {
+  if (req.cookies.token) {
+    return res.redirect("/dashboard");
+  }
+  res.render("auth/register");
+};
+
 // Register
 exports.register = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
 
+    // Check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.send("Email already in use");
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = await User.create({
+    await User.create({
       name,
       email,
       password: hashedPassword,
@@ -17,9 +31,18 @@ exports.register = async (req, res) => {
     });
 
     res.redirect("/login");
+
   } catch (err) {
     res.send(err.message);
   }
+};
+
+// Show Login Page
+exports.loginPage = (req, res) => {
+  if (req.cookies.token) {
+    return res.redirect("/dashboard");
+  }
+  res.render("auth/login");
 };
 
 // Login
@@ -34,12 +57,13 @@ exports.login = async (req, res) => {
     if (!isMatch) return res.send("Wrong password");
 
     const token = jwt.sign(
-        { id: user._id, role: user.role, name: user.name },
+      { id: user._id, role: user.role, name: user.name },
       process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
 
     res.cookie("token", token, { httpOnly: true });
+
     res.redirect("/dashboard");
 
   } catch (err) {
