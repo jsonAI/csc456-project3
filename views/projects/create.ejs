@@ -1,0 +1,25 @@
+<h2>Create Project</h2>
+
+<form method="POST" action="/projects/create">
+  
+  <div>
+    <input name="title" placeholder="Title" required />
+  </div>
+
+  <div>
+    <input name="description" placeholder="Description" />
+  </div>
+
+  <h4>Assign Users</h4>
+
+  <% users.forEach(u => { %>
+    <div>
+      <input type="checkbox" name="users" value="<%= u._id %>" />
+      <%= u.name %>
+    </div>
+  <% }) %>
+
+  <br>
+
+  <button type="submit">Create</button>
+</form>

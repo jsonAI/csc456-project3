@@ -1,0 +1,19 @@
+<h2>Projects</h2>
+
+<% if (user && user.role === "admin") { %>
+  <a href="/projects/create">Create Project</a>
+<% } %>
+
+<ul>
+  <% projects.forEach(project => { %>
+    <li>
+      <strong><%= project.title %></strong>
+      - <%= project.description %>
+
+      <% if (user && user.role === "admin") { %>
+        <a href="/projects/edit/<%= project._id %>">Edit</a>
+        <a href="/projects/delete/<%= project._id %>">Delete</a>
+      <% } %>
+    </li>
+  <% }) %>
+</ul>

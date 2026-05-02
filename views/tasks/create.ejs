@@ -1,0 +1,30 @@
+<h2>Create Task</h2>
+
+<form method="POST" action="/tasks/create">
+
+  <div>
+    <input name="title" placeholder="Task title" required />
+  </div>
+
+  <h4>Select Project</h4>
+  <div>
+    <select name="project">
+      <% projects.forEach(p => { %>
+        <option value="<%= p._id %>"><%= p.title %></option>
+      <% }) %>
+    </select>
+  </div>
+
+  <h4>Assign User</h4>
+  <div>
+    <select name="assignedTo">
+      <% users.forEach(u => { %>
+        <option value="<%= u._id %>"><%= u.name %></option>
+      <% }) %>
+    </select>
+  </div>
+
+  <br>
+
+  <button type="submit">Create</button>
+</form>

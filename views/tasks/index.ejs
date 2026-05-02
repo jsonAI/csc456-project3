@@ -1,0 +1,20 @@
+<h2>Tasks</h2>
+
+<% if (user && user.role === "admin") { %>
+  <a href="/tasks/create">Create Task</a>
+<% } %>
+
+<ul>
+  <% tasks.forEach(task => { %>
+    <li>
+      <strong><%= task.title %></strong>
+      - Project: <%= task.project?.title %>
+      - Assigned: <%= task.assignedTo?.name %>
+
+      <% if (user && user.role === "admin") { %>
+        <a href="/tasks/edit/<%= task._id %>">Edit</a>
+        <a href="/tasks/delete/<%= task._id %>">Delete</a>
+      <% } %>
+    </li>
+  <% }) %>
+</ul>

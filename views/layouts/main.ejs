@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project Management App</title>
+</head>
+<body>
+
+  <nav>
+    <a href="/dashboard">Dashboard</a> |
+    <a href="/projects">Projects</a> |
+    <a href="/tasks">Tasks</a> |
+
+    <% if (user) { %>
+      Logged in as <strong><%= user.name %></strong> (<%= user.role %>)
+      | <a href="/logout">Logout</a>
+    <% } %>
+  </nav>
+
+  <hr>
+
+  <%- body %>
+
+</body>
+</html>

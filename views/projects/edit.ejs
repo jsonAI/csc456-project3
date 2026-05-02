@@ -1,0 +1,30 @@
+<h2>Edit Project</h2>
+
+<form method="POST" action="/projects/edit/<%= project._id %>">
+  
+  <div>
+    <input name="title" value="<%= project.title %>" required />
+  </div>
+
+  <div>
+    <input name="description" value="<%= project.description %>" />
+  </div>
+
+  <h4>Assign Users</h4>
+
+  <% users.forEach(u => { %>
+    <div>
+      <input 
+        type="checkbox" 
+        name="users" 
+        value="<%= u._id %>"
+        <%= project.users.some(id => id.toString() === u._id.toString()) ? "checked" : "" %>
+      />
+      <%= u.name %>
+    </div>
+  <% }) %>
+
+  <br>
+
+  <button type="submit">Update</button>
+</form>
