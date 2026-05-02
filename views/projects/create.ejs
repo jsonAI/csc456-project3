@@ -17,10 +17,10 @@
   <% } %>
 
   <% users.forEach(u => { %>
-    <label style="display: block; margin-bottom: 8px;">
+    <div style="margin-bottom: 6px;">
       <input type="checkbox" name="users" value="<%= u._id %>" />
-      <%= u.name %> (<%= u.role %>)
-    </label>
+      <span><%= u.name %> (<%= u.role %>)</span>
+    </div>
   <% }) %>
 
   <br>
