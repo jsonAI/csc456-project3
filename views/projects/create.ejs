@@ -1,6 +1,8 @@
 <h2>Create Project</h2>
 
-<form method="POST" action="/projects/create" style="max-width: 400px;">
+<div style="max-width: 400px;">
+
+<form method="POST" action="/projects/create">
 
   <label>Title</label>
   <input name="title" placeholder="Enter project title" required />
@@ -14,16 +16,16 @@
     <p>No users available.</p>
   <% } %>
 
-  <div style="margin-top: 10px;">
-    <% users.forEach(u => { %>
-      <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-        <input type="checkbox" name="users" value="<%= u._id %>" />
-        <span><%= u.name %> (<%= u.role %>)</span>
-      </label>
-    <% }) %>
-  </div>
+  <% users.forEach(u => { %>
+    <label style="display: block; margin-bottom: 8px;">
+      <input type="checkbox" name="users" value="<%= u._id %>" />
+      <%= u.name %> (<%= u.role %>)
+    </label>
+  <% }) %>
 
   <br>
 
   <button type="submit" class="btn">Create</button>
 </form>
+
+</div>
