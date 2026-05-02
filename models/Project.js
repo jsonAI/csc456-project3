@@ -3,10 +3,13 @@ const mongoose = require("mongoose");
 const projectSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: true
+    required: true,
+    trim: true
   },
   description: {
-    type: String
+    type: String,
+    trim: true,
+    default: ""
   },
   users: [
     {
@@ -14,6 +17,8 @@ const projectSchema = new mongoose.Schema({
       ref: "User"
     }
   ]
+}, {
+  timestamps: true
 });
 
 module.exports = mongoose.model("Project", projectSchema);

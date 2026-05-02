@@ -62,7 +62,11 @@ exports.login = async (req, res) => {
       { expiresIn: "1d" }
     );
 
-    res.cookie("token", token, { httpOnly: true });
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: false, // true only on HTTPS (Render)
+      sameSite: "lax"
+    });
 
     res.redirect("/dashboard");
 

@@ -1,7 +1,7 @@
 <h2>Tasks</h2>
 
 <% if (user && user.role === "admin") { %>
-  <a href="/projects/create" class="btn">Create Project</a>
+  <a href="/tasks/create" class="btn">Create Task</a>
 <% } %>
 
 <ul>
@@ -16,11 +16,21 @@
       <small>Project: <%= task.project?.title %></small>
       <br>
       <small>Assigned: <%= task.assignedTo?.name %></small>
-      <br>
 
       <% if (user && user.role === "admin") { %>
-        <a href="/projects/edit/<%= project._id %>" class="btn">Edit</a>
-        <a href="/projects/delete/<%= project._id %>" class="btn btn-danger">Delete</a>
+        <div style="margin-top: 10px;">
+          <a href="/tasks/edit/<%= task._id %>" class="btn">Edit</a>
+
+          <form action="/tasks/delete/<%= task._id %>" method="POST" style="display:inline;">
+            <button 
+              type="submit"
+              class="btn btn-danger"
+              onclick="return confirm('Delete this task?')"
+            >
+              Delete
+            </button>
+          </form>
+        </div>
       <% } %>
     </li>
   <% }) %>

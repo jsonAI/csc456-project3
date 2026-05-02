@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 
-// 🔥 Global user middleware (FIXED)
+// 🔐 Global user middleware
 app.use((req, res, next) => {
   const token = req.cookies.token;
 
@@ -29,6 +29,7 @@ app.use((req, res, next) => {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       res.locals.user = decoded;
     } catch (err) {
+      res.clearCookie("token"); // remove invalid token
       res.locals.user = null;
     }
   } else {
@@ -50,7 +51,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // DB connection
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected"))
-  .catch(err => console.log(err));
+  .catch(err => console.error("MongoDB Error:", err.message));
 
 // Routes
 app.use("/", authRoutes);

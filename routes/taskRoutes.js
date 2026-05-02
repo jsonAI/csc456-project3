@@ -16,7 +16,7 @@ router.post("/tasks/create", verifyToken, isAdmin, taskController.createTask);
 router.get("/tasks/edit/:id", verifyToken, isAdmin, taskController.editTaskForm);
 router.post("/tasks/edit/:id", verifyToken, isAdmin, taskController.updateTask);
 
-// Delete task (admin only)
-router.get("/tasks/delete/:id", verifyToken, isAdmin, taskController.deleteTask);
+// Delete task (admin only) - POST instead of GET
+router.post("/tasks/delete/:id", verifyToken, isAdmin, taskController.deleteTask);
 
 module.exports = router;
