@@ -76,13 +76,19 @@
       background: #a71d2a;
     }
 
-    /* 🔥 FORM FIX */
-    input, select {
-      padding: 6px;
-      margin: 5px 0 12px 0;
-      width: 300px;
-      max-width: 100%;
-    }
+    /* FORM FIX */
+    input[type="text"], input[type="password"], select {
+  padding: 6px;
+  margin: 5px 0 12px 0;
+  width: 300px;
+  max-width: 100%;
+}
+
+/* Reset checkbox */
+input[type="checkbox"] {
+  width: auto;
+  margin-right: 6px;
+}
 
     label {
       display: block;
