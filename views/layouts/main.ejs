@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Project Manager</title>
+
   <style>
     body {
       font-family: Arial;
@@ -11,7 +12,7 @@
 
     nav {
       background: #222;
-      padding: 10px;
+      padding: 12px;
       color: white;
     }
 
@@ -19,6 +20,11 @@
       color: white;
       margin-right: 15px;
       text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:visited {
+      color: white;
     }
 
     nav a:hover {
@@ -32,16 +38,56 @@
       border-radius: 8px;
     }
 
-    button {
-      padding: 6px 12px;
-      margin-top: 10px;
-      cursor: pointer;
+    /* 🔥 NORMAL LINKS */
+    a {
+      color: #007bff;
+      text-decoration: none;
     }
 
+    a:visited {
+      color: #007bff;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* 🔥 BUTTON STYLE LINKS */
+    .btn {
+      display: inline-block;
+      padding: 6px 12px;
+      margin-top: 8px;
+      background: #007bff;
+      color: white !important;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .btn:hover {
+      background: #0056b3;
+    }
+
+    .btn-danger {
+      background: #dc3545;
+    }
+
+    .btn-danger:hover {
+      background: #a71d2a;
+    }
+
+    /* 🔥 FORM FIX */
     input, select {
-      padding: 5px;
-      margin: 5px 0;
-      width: 100%;
+      padding: 6px;
+      margin: 5px 0 12px 0;
+      width: 300px;
+      max-width: 100%;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
     }
 
     ul {
@@ -50,11 +96,12 @@
     }
 
     li {
-      padding: 10px;
+      padding: 12px;
       border-bottom: 1px solid #ddd;
     }
   </style>
 </head>
+
 <body>
 
   <% if (user) { %>
@@ -62,7 +109,7 @@
       <a href="/dashboard">Dashboard</a>
       <a href="/projects">Projects</a>
       <a href="/tasks">Tasks</a>
-  
+
       | <strong><%= user.name %></strong> (<%= user.role %>)
       | <a href="/logout">Logout</a>
     </nav>

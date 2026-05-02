@@ -1,7 +1,7 @@
 <h2>Projects</h2>
 
 <% if (user && user.role === "admin") { %>
-  <a href="/projects/create">Create Project</a>
+  <a href="/projects/create" class="btn">Create Project</a>
 <% } %>
 
 <ul>
@@ -17,8 +17,8 @@
       <br>
 
       <% if (user && user.role === "admin") { %>
-        <a href="/projects/edit/<%= project._id %>">Edit</a> |
-        <a href="/projects/delete/<%= project._id %>">Delete</a>
+        <a href="/projects/edit/<%= project._id %>" class="btn">Edit</a>
+        <a href="/projects/delete/<%= project._id %>" class="btn btn-danger">Delete</a>
       <% } %>
     </li>
   <% }) %>
