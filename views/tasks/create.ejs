@@ -1,30 +1,35 @@
 <h2>Create Task</h2>
 
+<% if (projects.length === 0) { %>
+  <p>No projects available. You must create a project first.</p>
+  <a href="/projects/create" class="btn">Create Project</a>
+<% } else { %>
+
 <form method="POST" action="/tasks/create">
 
-  <div>
-    <input name="title" placeholder="Task title" required />
-  </div>
+  <label>Task Title</label>
+  <input name="title" placeholder="Enter task title" required />
 
   <h4>Select Project</h4>
-  <div>
-    <select name="project">
-      <% projects.forEach(p => { %>
-        <option value="<%= p._id %>"><%= p.title %></option>
-      <% }) %>
-    </select>
-  </div>
+  <select name="project" required>
+    <% projects.forEach(p => { %>
+      <option value="<%= p._id %>"><%= p.title %></option>
+    <% }) %>
+  </select>
 
   <h4>Assign User</h4>
-  <div>
-    <select name="assignedTo">
-      <% users.forEach(u => { %>
-        <option value="<%= u._id %>"><%= u.name %></option>
-      <% }) %>
-    </select>
-  </div>
+  <select name="assignedTo">
+    <option value="">-- Optional --</option>
+    <% users.forEach(u => { %>
+      <option value="<%= u._id %>">
+        <%= u.name %> (<%= u.role %>)
+      </option>
+    <% }) %>
+  </select>
 
   <br>
 
-  <button type="submit">Create</button>
+  <button type="submit" class="btn">Create Task</button>
 </form>
+
+<% } %>

@@ -1,36 +1,45 @@
 <h2>Edit Task</h2>
 
+<% if (!task) { %>
+  <p>Task not found.</p>
+  <a href="/tasks" class="btn">Back</a>
+<% } else { %>
+
 <form method="POST" action="/tasks/edit/<%= task._id %>">
 
-  <div>
-    <input name="title" value="<%= task.title %>" required />
-  </div>
+  <label>Task Title</label>
+  <input name="title" value="<%= task.title %>" required />
 
   <h4>Select Project</h4>
-  <div>
-    <select name="project">
-      <% projects.forEach(p => { %>
-        <option value="<%= p._id %>" 
-          <%= task.project.toString() === p._id.toString() ? "selected" : "" %>>
-          <%= p.title %>
-        </option>
-      <% }) %>
-    </select>
-  </div>
+
+  <% if (projects.length === 0) { %>
+    <p>No projects available.</p>
+  <% } %>
+
+  <select name="project" required>
+    <% projects.forEach(p => { %>
+      <option value="<%= p._id %>" 
+        <%= task.project && task.project.toString() === p._id.toString() ? "selected" : "" %>>
+        <%= p.title %>
+      </option>
+    <% }) %>
+  </select>
 
   <h4>Assign User</h4>
-  <div>
-    <select name="assignedTo">
-      <% users.forEach(u => { %>
-        <option value="<%= u._id %>" 
-          <%= task.assignedTo?.toString() === u._id.toString() ? "selected" : "" %>>
-          <%= u.name %>
-        </option>
-      <% }) %>
-    </select>
-  </div>
+
+  <select name="assignedTo">
+    <option value="">-- Optional --</option>
+    <% users.forEach(u => { %>
+      <option value="<%= u._id %>" 
+        <%= task.assignedTo && task.assignedTo.toString() === u._id.toString() ? "selected" : "" %>>
+        <%= u.name %> (<%= u.role %>)
+      </option>
+    <% }) %>
+  </select>
 
   <br>
 
-  <button type="submit">Update</button>
+  <button type="submit" class="btn">Update</button>
 </form>
+
+<% } %>

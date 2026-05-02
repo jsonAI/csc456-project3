@@ -1,16 +1,23 @@
 <h2>Edit Project</h2>
 
-<form method="POST" action="/projects/edit/<%= project._id %>">
-  
-  <div>
-    <input name="title" value="<%= project.title %>" required />
-  </div>
+<% if (!project) { %>
+  <p>Project not found.</p>
+  <a href="/projects" class="btn">Back</a>
+<% } else { %>
 
-  <div>
-    <input name="description" value="<%= project.description %>" />
-  </div>
+<form method="POST" action="/projects/edit/<%= project._id %>">
+
+  <label>Title</label>
+  <input name="title" value="<%= project.title %>" required />
+
+  <label>Description</label>
+  <input name="description" value="<%= project.description %>" />
 
   <h4>Assign Users</h4>
+
+  <% if (users.length === 0) { %>
+    <p>No users available.</p>
+  <% } %>
 
   <% users.forEach(u => { %>
     <div>
@@ -20,11 +27,13 @@
         value="<%= u._id %>"
         <%= project.users.some(id => id.toString() === u._id.toString()) ? "checked" : "" %>
       />
-      <%= u.name %>
+      <%= u.name %> (<%= u.role %>)
     </div>
   <% }) %>
 
   <br>
 
-  <button type="submit">Update</button>
+  <button type="submit" class="btn">Update</button>
 </form>
+
+<% } %>

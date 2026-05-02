@@ -15,23 +15,27 @@
 
 <div style="display: flex; gap: 20px; flex-wrap: wrap;">
 
+  <!-- Projects -->
   <div style="padding: 15px; border: 1px solid #ddd; border-radius: 8px;">
     <h4>Projects</h4>
-    <a href="/projects">View Projects</a>
-    <br><br>
+
+    <a href="/projects" class="btn">View Projects</a>
 
     <% if (user && user.role === "admin") { %>
-      <a href="/projects/create">Create Project</a>
+      <br><br>
+      <a href="/projects/create" class="btn">Create Project</a>
     <% } %>
   </div>
 
+  <!-- Tasks -->
   <div style="padding: 15px; border: 1px solid #ddd; border-radius: 8px;">
     <h4>Tasks</h4>
-    <a href="/tasks">View Tasks</a>
-    <br><br>
+
+    <a href="/tasks" class="btn">View Tasks</a>
 
     <% if (user && user.role === "admin") { %>
-      <a href="/tasks/create">Create Task</a>
+      <br><br>
+      <a href="/tasks/create" class="btn">Create Task</a>
     <% } %>
   </div>
 
