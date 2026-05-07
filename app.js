@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 
-// 🔐 Global user middleware
+// Global user middleware
 app.use((req, res, next) => {
   const token = req.cookies.token;
 
